@@ -1,0 +1,5 @@
+[client]
+database = csnd
+user = root
+password = csy20150510
+default-character-set = utf8

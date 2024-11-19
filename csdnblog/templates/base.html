@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>{% block title %}Yin_BLOG{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bootstrap5/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap5/popper.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'bootstrap5/bootstrap.min.css' %}"></script>
+    
+    {% block head %}{% endblock %}
+
+</head>
+<body>
+<header class="p-3 text-bg-warning border-bottom mb-3">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/static" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <img src="{% static 'image/logo.png' %}" alt="" height=40>
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-2">
+                <li><a href="/index" class="nav-link px-2 text-secondary">First Page</a></li>
+                <li><a href="{% url 'blog:pub_blog' %}" class="nav-link px-2 text-secondary">Public Blog</a></li>
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" action="{% url 'blog:search'%}">
+                <input type="search" name="q" class="form-control form-control-dark text-bg-light" placeholder="Search..."
+                       aria-label="Search">
+            </form>
+
+
+
+            {% if user.is_authenticated %}
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle show"
+                       data-bs-toggle="dropdown" aria-expanded="True">
+                        <img src="{% static 'image/avatar.webp' %}" alt="mdo" width="32" height="32"
+                             class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small show"
+                        style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34px, 0px);"
+                        data-popper-placement="bottom-start">
+                        <li><a class="dropdown-item" href="{% url 'yinauth:logout' %}">退出登录</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <div class="text-end">
+                    <a href="{% url 'yinauth:login' %}" type="button" class="btn btn-outline-primary me-2">登录</a>
+                    <a href="{% url 'yinauth:register' %}" type="button" class="btn btn-primary">注册</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</header>
+<main class="container bg-white p-3 rounded  bg-white">
+    {% block main %}{% endblock %}
+</main>
+</body>
+</html>
+
+
+
+ 
